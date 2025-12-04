@@ -1,0 +1,10 @@
+langchain==0.2.17
+langchain-groq>=0.1.5
+langchain-community==0.2.17
+langchain-huggingface==0.0.3
+faiss-cpu==1.8.0
+pypdf==4.0.2
+PyMuPDF==1.24.9
+ipykernel==6.29.5
+python-dotenv==1.0.1
+Django==4.2.7

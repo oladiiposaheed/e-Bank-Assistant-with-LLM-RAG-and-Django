@@ -1,0 +1,65 @@
+{% extends 'web_app/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="text-center mb-5">
+            <h1 class="display-4">🏦 e-Bank Assistant</h1>
+            <p class="lead">AI-powered customer support using RAG technology</p>
+        </div>
+        
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title">Ask About e-Bank Services</h5>
+                <form action="{% url 'query' %}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <textarea name="question" class="form-control" 
+                                  placeholder="Example: How do I change my password? What security features are available? How can I contact support?" 
+                                  rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Ask Question</button>
+                </form>
+                
+                <hr>
+                
+                <div class="mt-4">
+                    <h6>Try asking about:</h6>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6>🔒 Account Security</h6>
+                                    <small>Password changes, 2FA, biometric login</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6>💳 Cards & Payments</h6>
+                                    <small>Virtual cards, transfers, bill payments</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6>📞 Support</h6>
+                                    <small>Contact info, common issues, help</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-4 text-center">
+            <p class="text-muted">
+                Powered by Django + LangChain + Groq LLM
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

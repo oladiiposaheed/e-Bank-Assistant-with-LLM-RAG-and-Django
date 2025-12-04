@@ -1,0 +1,73 @@
+{% extends 'web_app/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <!-- Back button -->
+        <a href="{% url 'index' %}" class="btn btn-outline-secondary mb-3">← Back</a>
+        
+        <!-- Query form -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <textarea name="question" class="form-control" 
+                                  placeholder="Ask another question..." 
+                                  rows="3" required>
+                                  {% if question %}
+
+                                    {{ question }}
+
+                                  {% endif %}
+                        </textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ask</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Results -->
+        {% if question %}
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Results</h5>
+            </div>
+            <div class="card-body">
+                <!-- Question -->
+                <div class="chat-bubble user-bubble">
+                    <strong>You:</strong> {{ question }}
+                </div>
+                
+                <!-- Answer -->
+                <div class="chat-bubble">
+                    <strong>Assistant:</strong>
+                    <p class="mt-2">
+                        {{ answer|linebreaks }}
+                    </p>
+                </div>
+                
+                <!-- Sources -->
+                {% if source_count > 0 %}
+                <div class="mt-4">
+                    <h6>📚 Sources ({{ source_count }} found)</h6>
+                    {% for source in sources %}
+                    <div class="source-card">
+                        <small>{{ source.content }}</small>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <!-- Error -->
+                {% if error %}
+                <div class="alert alert-danger mt-3">
+                    {{ error }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
