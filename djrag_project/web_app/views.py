@@ -53,13 +53,14 @@ def query_view(request):
                     answer=result['answer'][:1000]
                 )
                 
-                return render(request, 'web_app/query.html', {
+                dict = {
                     'form': form,
                     'question': question,
                     'answer': result['answer'],
                     'sources': result['sources'],
                     'source_count': result['source_count']
-                })
+                }
+                return render(request, 'web_app/query.html', context=dict)
                 
             except Exception as e:
                 error_msg = str(e)
@@ -67,13 +68,15 @@ def query_view(request):
                 print(f"DEBUG - sys.path: {sys.path}")
                 print(f"DEBUG - Current dir: {os.getcwd()}")
                 
-                return render(request, 'web_app/query.html', {
+                dict = {
                     'form': form,
                     'error': f"Error: {error_msg}",
                     'question': question
-                })
+                }
+                
+                return render(request, 'web_app/query.html', context=dict)
     
     else:
         form = QueryForm()
-    
-    return render(request, 'web_app/query.html', {'form': form})
+        {'form': form}
+    return render(request, 'web_app/query.html', context=dict)
