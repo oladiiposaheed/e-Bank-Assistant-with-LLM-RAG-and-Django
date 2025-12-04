@@ -1,1 +1,9 @@
 .env
+
+custm-env/
+customer-venv/
+customer-env/
+env/
+*.dll
+*.so
+*.pyd
